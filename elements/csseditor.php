@@ -35,7 +35,11 @@ class JFormFieldCSSEditor extends JFormField {
 		if(!JPluginHelper::isEnabled('editors', 'codemirror')) return '<strong>Sorry: this plugin needs the CodeMirror editor plug-in to be enabled</strong>';
 		$app = JFactory::getApplication('administrator');
 		$app->setUserState('editor.source.syntax', 'css');
-		$editor = JFactory::getEditor('codemirror');
+		if(JVERSION<4){
+			$editor = JFactory::getEditor('codemirror');
+		} else {
+			$editor = JEditor::getInstance('codemirror');
+		}
 		$params = array(
 					'linenumbers'=> '1' ,
                  'tabmode'  => 'shift'
